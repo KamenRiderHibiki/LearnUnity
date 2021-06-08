@@ -11,7 +11,7 @@ public class Graph : MonoBehaviour
     Transform pointPrefab = default;
     [SerializeField, Range(10, 100)]
     int resolution = 10;
-    [SerializeField, Range(0, 1)]
+    [SerializeField, Range(0, 2)]
     float function = 0;
     [SerializeField, Range(2, 10)]
     float width = 2;
@@ -53,8 +53,8 @@ public class Graph : MonoBehaviour
     // get Y value
     float GetYValueByX(float control, float x ,float time)
     {
-        int floorControl = Floor(control);
-        int conbineRate = control - floorControl;
+        int floorControl = (int)Floor(control);
+        float conbineRate = control - (float)floorControl;
         float y = 0;
         switch (floorControl)
         {
@@ -62,10 +62,10 @@ public class Graph : MonoBehaviour
                 y = Sin(Wave(x, time)) * (1.0f - conbineRate) + Sin(MultiWave(x, time)) * conbineRate;
                 break;
             case 1:
-                y = Sin(Wave(x, time)) * (1.0f - control) + Sin(MultiWave(x, time)) * control;
+                y = Sin(MultiWave(x, time)) * (1.0f - conbineRate) + Sin(Ripple(x, time)) * conbineRate;
                 break;
             default:
-                float y = Sin(Wave(x, time)) * (1.0f - control) + Sin(MultiWave(x, time)) * control;
+                y = Sin(Ripple(x, time));
                 break;
         }
         return y;

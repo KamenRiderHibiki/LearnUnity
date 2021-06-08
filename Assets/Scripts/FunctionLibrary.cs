@@ -26,6 +26,8 @@ public static class FunctionLibrary
 
     public static float Ripple(float x, float t)
     {
-        return Abs(x);
+        float d = Abs(x);
+        float y = Sin(4f * PI * (d - t * 0.1f));
+        return y / (1f + d * 10f);
     }
 }
