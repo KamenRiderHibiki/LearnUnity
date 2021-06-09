@@ -6,6 +6,22 @@ using static UnityEngine.Mathf;
 
 public static class FunctionLibrary
 {
+    public static float control = 0f;
+
+    public delegate float Function(float x, float t);
+
+    public enum FunctionNames
+    {
+        Wave, MultiWave, Ripple, Mixed
+    }
+
+    public static Function[] Functions = { Wave, MultiWave, Ripple, Mixed};
+
+    public static Function GetFunction(FunctionNames name)
+    {
+        //int floorControl = (int)Floor(control);
+        return Functions[(int)name];
+    }
     // 静态类不能继承自 MonoBehaviour
     // 静态类不能声明 Start Update 方法
 
@@ -29,5 +45,26 @@ public static class FunctionLibrary
         float d = Abs(x);
         float y = Sin(4f * PI * (d - t * 0.1f));
         return y / (1f + d * 10f);
+    }
+
+    // get mixed Y value by slide block
+    public static float Mixed(float x ,float time)
+    {
+        int floorControl = (int)Floor(control);
+        float conbineRate = control - (float)floorControl;
+        float y = 0;
+        switch (floorControl)
+        {
+            case 0:
+                y = Sin(Wave(x, time)) * (1.0f - conbineRate) + Sin(MultiWave(x, time)) * conbineRate;
+                break;
+            case 1:
+                y = Sin(MultiWave(x, time)) * (1.0f - conbineRate) + Sin(Ripple(x, time)) * conbineRate;
+                break;
+            default: // 2
+                y = Sin(Ripple(x, time));
+                break;
+        }
+        return y;
     }
 }
