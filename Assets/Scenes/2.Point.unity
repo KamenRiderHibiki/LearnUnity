@@ -367,8 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointPrefab: {fileID: 241433777}
-  resolution: 87
-  width: 4.47
+  resolution: 40
+  width: 4
   function: 0
   mixhandle: 0
 --- !u!4 &1696391258
