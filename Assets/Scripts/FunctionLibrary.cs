@@ -8,7 +8,7 @@ public static class FunctionLibrary
 {
     public static float control = 0f;
 
-    public delegate float Function(float x, float t);
+    public delegate float Function(float x, float z, float t);
 
     public enum FunctionNames
     {
@@ -26,13 +26,13 @@ public static class FunctionLibrary
     // 静态类不能声明 Start Update 方法
 
     // 正弦波
-    public static float Wave(float x, float t)
+    public static float Wave(float x, float z, float t)
     {
         return Sin(PI * (x + t));
     }
 
     // 多正弦波
-    public static float MultiWave(float x, float t)
+    public static float MultiWave(float x, float z, float t)
     {
         float y = Sin(PI * (x + 0.5f * t));
         y += Sin(2 * PI * (x + t)) * 0.5f;
@@ -40,7 +40,7 @@ public static class FunctionLibrary
         return y * (2f / 3f);
     }
 
-    public static float Ripple(float x, float t)
+    public static float Ripple(float x, float z, float t)
     {
         float d = Abs(x);
         float y = Sin(4f * PI * (d - t * 0.1f));
@@ -48,7 +48,7 @@ public static class FunctionLibrary
     }
 
     // get mixed Y value by slide block
-    public static float Mixed(float x ,float time)
+    public static float Mixed(float x , float z, float time)
     {
         int floorControl = (int)Floor(control);
         float conbineRate = control - (float)floorControl;
@@ -56,13 +56,13 @@ public static class FunctionLibrary
         switch (floorControl)
         {
             case 0:
-                y = Sin(Wave(x, time)) * (1.0f - conbineRate) + Sin(MultiWave(x, time)) * conbineRate;
+                y = Sin(Wave(x, z, time)) * (1.0f - conbineRate) + Sin(MultiWave(x, z, time)) * conbineRate;
                 break;
             case 1:
-                y = Sin(MultiWave(x, time)) * (1.0f - conbineRate) + Sin(Ripple(x, time)) * conbineRate;
+                y = Sin(MultiWave(x, z, time)) * (1.0f - conbineRate) + Sin(Ripple(x, z, time)) * conbineRate;
                 break;
             default: // 2
-                y = Sin(Ripple(x, time));
+                y = Sin(Ripple(x, z, time));
                 break;
         }
         return y;
