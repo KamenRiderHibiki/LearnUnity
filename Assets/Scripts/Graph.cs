@@ -23,19 +23,17 @@ public class Graph : MonoBehaviour
         var step = width / resolution;
         var scale = Vector3.one * step;
         points = new Transform[resolution * resolution];
-        for(int i = 0, j = 0, k = 0;i < points.Length;i++, j++){
-            if(j == resolution){
-                j = 0;
-                k += 1;
-            }
-            Transform point = Instantiate(pointPrefab);
-            point.SetParent(transform, false);
-            position.x = (j + 0.5f) * step - width / 2;
+        for(int i = 0, k = 0;k < resolution;k++){
             position.z = (k + 0.5f) * step - width / 2;
-            position.y = position.x * position.x;
-            point.localPosition = position;
-            point.localScale = scale;
-            points[i] = point;
+            for(int j = 0;j < resolution;j++,i++){
+                Transform point = Instantiate(pointPrefab);
+                position.x = (j + 0.5f) * step - width / 2;
+                position.y = position.x * position.x;
+                point.localPosition = position;
+                point.localScale = scale;
+                point.SetParent(transform, false);
+                points[i] = point;
+            }
         }
     }
     // Start is called before the first frame update
