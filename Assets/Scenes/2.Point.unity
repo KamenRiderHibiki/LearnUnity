@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 714019404}
   - component: {fileID: 714019406}
   - component: {fileID: 714019405}
+  - component: {fileID: 714019407}
   m_Layer: 5
   m_Name: Frame Rate Text
   m_TagString: Untagged
@@ -268,6 +269,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714019403}
   m_CullTransparentMesh: 1
+--- !u!114 &714019407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714019403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b2cf108e983a14f8a5252628c70f87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: {fileID: 714019405}
+  sampleDuration: 1
 --- !u!1 &1033800015
 GameObject:
   m_ObjectHideFlags: 0
