@@ -231,8 +231,8 @@ GameObject:
   - component: {fileID: 816101208}
   - component: {fileID: 816101207}
   - component: {fileID: 816101206}
-  - component: {fileID: 816101211}
   - component: {fileID: 816101210}
+  - component: {fileID: 816101211}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -328,6 +328,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b0f1e454a2a814f838deb56444be7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
+  maxAccleration: 7.2
+  allowArea:
+    serializedVersion: 2
+    x: -4.5
+    y: -4.5
+    width: 9
+    height: 9
 --- !u!96 &816101211
 TrailRenderer:
   serializedVersion: 2
@@ -378,13 +386,31 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.12804279
+        value: 0.12804134
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49229625
+        value: 0.10347607
+        inSlope: -0.0130527085
+        outSlope: -0.0130527085
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.3173477
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
