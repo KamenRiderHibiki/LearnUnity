@@ -7,7 +7,7 @@ public class RigidbodySphere : MonoBehaviour
     [SerializeField, Range(0f, 100f)]
     float maxSpeed = 1f;
     [SerializeField, Range(0f, 10f)]
-    float maxAccleration = 1f;
+    float maxAccleration = 1f, maxAirAccleration = 1f;
     [SerializeField, Range(0f, 5f)]
     float jumpHeight = 2f;
     [SerializeField, Range(0, 5)]
@@ -57,7 +57,6 @@ public class RigidbodySphere : MonoBehaviour
             lastPosition = mouse;
             directionTimer = 0f;
         }
-        float speedChange = maxAccleration * Time.deltaTime;
 
         UpdateJumpState();
         if (desiredJump)
@@ -66,6 +65,8 @@ public class RigidbodySphere : MonoBehaviour
             Jump();
         }
 
+        float acc = onGround ? maxAccleration : maxAirAccleration;
+        float speedChange = acc * Time.deltaTime;
         velocity = body.velocity;
         if(desiredVelocity != Vector3.zero)
         {
@@ -91,17 +92,7 @@ public class RigidbodySphere : MonoBehaviour
             jumpPhase += 1;
             velocity = body.velocity;
             float jumpSpeed = Mathf.Sqrt(-2.0f * Physics.gravity.y * jumpHeight);
-            if (velocity.y > 0f)
-            {
-                if (velocity.y < jumpSpeed)
-                {
-                    velocity.y = jumpSpeed;
-                }
-            }
-            else
-            {
-                velocity.y += jumpSpeed;
-            }
+            velocity.y = Mathf.Max(jumpSpeed, velocity.y);
             body.velocity = velocity;
         }
     }
